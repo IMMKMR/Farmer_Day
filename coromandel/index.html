@@ -222,6 +222,7 @@
 
 
       /* ===== Cover v2 ===== */
+      html, .view { overflow-x: clip; max-width: 100% }
       .top .brand { transition: opacity .4s }
       body:has(#v-home:not([hidden])) .top:not(.sc) .brand,
       body:has(#v-closing:not([hidden])) .top:not(.sc) .brand { opacity: 0; pointer-events: none }
@@ -274,7 +275,7 @@
 
       .cv.cv-flip .cv-date {
         left: auto;
-        right: -34px
+        right: -46px
       }
 
       .cv.cv-flip h1.cv-h {
@@ -400,17 +401,17 @@
       /* date badge straddling the card's bottom-left corner */
       .cv-date {
         position: absolute;
-        left: -34px;
-        bottom: -44px;
+        left: -46px;
+        bottom: -28px;
         z-index: 3;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-        width: 168px;
-        height: 168px;
-        padding: 18px;
+        width: 138px;
+        height: 138px;
+        padding: 14px;
         background: var(--ink);
         color: var(--cream);
         opacity: 0;
@@ -421,23 +422,23 @@
       .cv-card.in .cv-date { opacity: 1; transform: none }
 
       .cv-date small {
-        font-size: .62rem;
+        font-size: .52rem;
         font-weight: 600;
-        letter-spacing: .22em;
+        letter-spacing: .16em;
         text-transform: uppercase;
         color: var(--wheat)
       }
 
       .cv-date b {
-        font-size: 2.7rem;
+        font-size: 2rem;
         font-weight: 800;
         line-height: 1;
         letter-spacing: -.04em;
-        margin: 6px 0 4px
+        margin: 4px 0 2px
       }
 
       .cv-date b span { color: var(--wheat); font-weight: 400; margin: 0 2px }
-      .cv-date em { font-style: normal; font-size: .72rem; opacity: .8; line-height: 1.3 }
+      .cv-date em { font-style: normal; font-size: .64rem; opacity: .8; line-height: 1.3 }
 
       .cv-scroll {
         position: absolute;
@@ -475,29 +476,14 @@
 
       @keyframes cvScroll { to { left: 100% } }
 
-      @media (max-width: 900px) {
-        .cv, .cv.cv-flip { grid-template-columns: 1fr; padding: 84px 0 64px; gap: 40px; align-items: start }
-        .cv-card { order: -1; width: calc(100% - 40px); justify-self: center }
-        .cv.cv-flip .cv-card { justify-self: center }
-        .cv-frame { border-radius: 20px !important; clip-path: none !important }
-        .cv-date, .cv.cv-flip .cv-date { width: 120px; height: 120px; left: auto; right: -8px; bottom: -36px }
-        .cv-date b { font-size: 1.9rem }
-        .cv-main, .cv.cv-flip .cv-main { padding: 0 20px }
-        .cv .hero-brand img { height: 48px }
-        .cv .hero-brand .covana-logo { height: 24px }
-        .cv-scroll { display: none }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .cv-h .ln > span, .cv-img, .cv-frame, .cv-date { transition: none !important; transform: none !important; opacity: 1 !important; clip-path: none !important }
-        .cv-scroll i::after { animation: none }
-      }
-
       .cv-frame { border-radius: 260px 0 0 28px; clip-path: circle(0% at 72% 40%) }
       .cv-card.in .cv-frame { clip-path: circle(150% at 72% 40%) }
       .cv-flip .cv-frame { border-radius: 0 260px 28px 0; clip-path: circle(0% at 28% 40%) }
       .cv-flip .cv-card.in .cv-frame { clip-path: circle(150% at 28% 40%) }
       .cv-date {
+        width: 148px;
+        height: 148px;
+        padding: 34px 12px 12px 34px;
         border-radius: 100% 0 0 0;
         align-items: flex-end;
         justify-content: flex-end;
@@ -506,7 +492,11 @@
           repeating-conic-gradient(from 270deg at 100% 100%, rgba(245, 166, 35, .3) 0deg 5deg, transparent 5deg 13deg),
           var(--ink)
       }
+      .cv-date small { font-size: .46rem; letter-spacing: .11em }
+      .cv-date b { font-size: 1.75rem; margin: 2px 0 1px }
+      .cv-date em { font-size: .58rem }
       .cv-flip .cv-date {
+        padding: 34px 34px 12px 12px;
         border-radius: 0 100% 0 0;
         align-items: flex-start;
         justify-content: flex-end;
@@ -514,6 +504,92 @@
         background:
           repeating-conic-gradient(from 0deg at 0% 100%, rgba(245, 166, 35, .3) 0deg 5deg, transparent 5deg 13deg),
           var(--ink)
+      }
+
+      @media (max-width: 900px) {
+        .cv, .cv.cv-flip { grid-template-columns: minmax(0, 1fr); padding: 84px 0 56px; gap: 36px; align-items: start; min-height: auto }
+        .cv-card { order: -1; width: calc(100% - 36px); justify-self: center }
+        .cv.cv-flip .cv-card { justify-self: center }
+        .cv-frame, .cv-flip .cv-frame { border-radius: 36px 16px 16px 16px }
+        .cv-date, .cv.cv-flip .cv-date {
+          left: auto !important;
+          right: 12px !important;
+          bottom: -16px !important;
+          width: auto !important;
+          height: auto !important;
+          padding: 6px 14px !important;
+          border-radius: 999px !important;
+          clip-path: none !important;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          border: 1px solid var(--wheat);
+          background: var(--ink) !important;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, .5)
+        }
+        .cv-date small { font-size: .54rem !important; letter-spacing: .12em !important }
+        .cv-date b { font-size: 1rem !important; margin: 0 !important }
+        .cv-date em { font-size: .62rem !important }
+        .cv-main, .cv.cv-flip .cv-main { padding: 0 20px }
+        .cv .hero-brand img { height: 50px; max-width: 175px }
+        .cv .hero-brand .covana-logo { height: 24px }
+        .cv-scroll { display: none }
+
+        .hgal { height: auto !important }
+        .stick { position: relative; height: auto; padding: 36px 0 24px; justify-content: flex-start; gap: 18px }
+        .gh { padding: 0 20px }
+        .track { overflow-x: auto; scroll-snap-type: x mandatory; width: 100%; padding: 4px 20px 12px; gap: 16px; transform: none !important; scrollbar-width: none }
+        .track::-webkit-scrollbar { display: none }
+        .gc { flex: 0 0 min(82vw, 380px); scroll-snap-align: center }
+        .wrap { padding: 36px 20px 20px }
+        .heading { padding-top: 78px; padding-bottom: 16px }
+        .wrap+.wrap, .wrap+main.wrap { padding-top: 12px }
+      }
+
+      @media (max-width: 600px) {
+        .top { flex-wrap: nowrap; justify-content: space-between; padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 10px; gap: 6px; max-width: 100vw }
+        body:has(#v-home:not([hidden])) .top:not(.sc) .brand,
+        body:has(#v-closing:not([hidden])) .top:not(.sc) .brand { display: none }
+        body:has(#v-home:not([hidden])) .top:not(.sc),
+        body:has(#v-closing:not([hidden])) .top:not(.sc) { justify-content: center }
+        .brand { gap: 6px }
+        .brand .brand-client-img { height: 20px; max-width: 72px }
+        .brand .covana-logo { height: 11px }
+        .brand .xsep { font-size: .72rem }
+        .top nav { gap: 10px; font-size: .76rem; white-space: nowrap }
+
+        .mq { padding: 14px 0 }
+        .mq span { font-size: 1.35rem }
+
+        .cv, .cv.cv-flip { padding: 62px 0 40px; gap: 26px; max-width: 100vw; overflow-x: clip }
+        .cv-main, .cv.cv-flip .cv-main { padding: 0 18px; width: 100%; box-sizing: border-box }
+        .cv-card { width: calc(100% - 28px); max-width: 100% }
+
+        .cv .hero-brand, .cv.cv-flip .hero-brand { margin-bottom: 16px; gap: 12px }
+        .cv .hero-brand img { height: 40px; max-width: 135px }
+        .cv .hero-brand .covana-logo { height: 18px }
+        .cv .hero-brand .xsep { font-size: 1.05rem }
+        .cv-eyebrow, .cv.cv-flip .cv-eyebrow { font-size: .66rem; letter-spacing: .14em; margin-bottom: 10px }
+        .cv-eyebrow::before { width: 20px }
+        .cv h1.cv-h, .cv.cv-flip h1.cv-h { font-size: clamp(1.75rem, 8vw, 2.5rem); line-height: 1.04; margin-bottom: 14px }
+        .cv-sub, .cv.cv-flip .cv-sub { font-size: .92rem; margin-bottom: 20px }
+        .cv-cta { width: 100%; max-width: 100%; justify-content: center; padding: 14px 20px; font-size: .95rem; box-sizing: border-box }
+
+        .hgal { overflow-x: clip }
+        .insgrid, .meta { grid-template-columns: 1fr }
+        .gc { border-radius: 18px; padding: 16px }
+        .gc .n { font-size: 1.8rem }
+        .gc b { font-size: 1.1rem }
+        .wrap { padding: 32px 18px 20px }
+        .heading { padding-top: 74px; padding-bottom: 14px }
+        .pager { padding: 0 18px 44px }
+        .pager a { padding: 12px 18px; font-size: 1.6rem; border-radius: 14px }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .cv-h .ln > span, .cv-img, .cv-frame, .cv-date { transition: none !important; transform: none !important; opacity: 1 !important; clip-path: none !important }
+        .cv-scroll i::after { animation: none }
       }
 
       /* hero */
@@ -1324,7 +1400,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c1-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <span class="mute">
@@ -1378,7 +1454,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c2-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <a href="https://youtu.be/z_eknOqTrWM?si=PHNCO9vvE9o8OB18" target="_blank" rel="noopener">
@@ -1433,7 +1509,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c3-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <a href="https://theogarnot.com/infinite-zoom/" target="_blank" rel="noopener">
@@ -1495,7 +1571,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c4-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <span class="mute">
@@ -1545,7 +1621,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c5-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <span class="mute">
@@ -1599,7 +1675,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c6-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <a href="https://youtu.be/nNP4o1wE6Vo?si=fBPwPWwMYw1XyhXN" target="_blank" rel="noopener">
@@ -1664,7 +1740,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c7-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <a href="https://youtu.be/4aUwS1Q6CWs?si=-DpR-9sWHr800z9N" target="_blank" rel="noopener">
@@ -1719,7 +1795,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c8-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <a href="https://youtu.be/ZuqAiShhZg0?si=FzJEIeUcJplazdrC" target="_blank" rel="noopener">
@@ -1795,7 +1871,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c9-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <span class="mute">
@@ -1844,7 +1920,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c10-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <a href="https://youtu.be/-LvcQ-x-S9M?si=gWWck0_tXd9UHuVT" target="_blank" rel="noopener">
@@ -1910,7 +1986,7 @@
         </section>
       </main>
       <main class="wrap narrow" id="c11-refs">
-        <h3 class="rv" style="margin-top:36px">References</h3>
+        <h3 class="rv" style="margin-top:0">References</h3>
         <ul class="refs">
           <li class="rv">
             <a href="https://www.instagram.com/reel/DfbYWTPgDe8/?rpxt=bnR0Zzg5aHFxazhm" target="_blank" rel="noopener">
@@ -1925,17 +2001,8 @@
             </span>
           </li>
           <li class="rv">
-            <a href="https://youtu.be/10XbmuHmjbc?si=O9E9eiZ9muzCIQiq" target="_blank" rel="noopener">
-              <span>Reference 2</span>
-              <b>↗</b>
-            </a>
-            <div style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:12px;">
-              <iframe src="https://www.youtube.com/embed/10XbmuHmjbc" title="Together We Soar - Celebrating India on its 75th Republic Day" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </li>
-          <li class="rv">
             <a href="https://youtu.be/dXMsB_bY2Os?si=pLtfphf0w0H2F34f" target="_blank" rel="noopener">
-              <span>Reference 3</span>
+              <span>Reference 2</span>
               <b>↗</b>
             </a>
             <div style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:12px;">
@@ -2200,10 +2267,10 @@
           a.rel = 'noopener';
           a.title = f.title || 'Watch on YouTube';
           a.style.cssText = 'position:absolute;inset:0;display:block;background:#000 url(https://i.ytimg.com/vi/' + id + '/hqdefault.jpg) center/cover no-repeat;border-radius:12px;text-decoration:none';
-          a.innerHTML = '<span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#e9b949;color:#141414;font-weight:800;padding:12px 22px;border-radius:99px">▶ Watch on YouTube</span>';
+          a.innerHTML = '<span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#e9b949;color:#141414;font-weight:800;padding:10px 20px;border-radius:99px;white-space:nowrap;font-size:.95rem;box-shadow:0 4px 16px rgba(0,0,0,.45)">▶ Watch on YouTube</span>';
           var box = f.parentNode;
           if (f.hasAttribute('width') && !/position:\s*absolute/.test(f.getAttribute('style') || '')) {
-            box.style.cssText += ';position:relative;width:100%;max-width:337px;aspect-ratio:9/16;overflow:hidden;border-radius:12px';
+            box.style.cssText += ';position:relative;width:100%;max-width:337px;margin:0 auto;aspect-ratio:9/16;overflow:hidden;border-radius:12px';
           }
           box.replaceChild(a, f);
         });
